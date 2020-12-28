@@ -1,5 +1,7 @@
 class App {
   constructor() {
+    this.notes = [];
+
     this.$form = document.querySelector("#form");
     this.$noteTitle = document.querySelector("#note-title");
     this.$noteText = document.querySelector("#note-text");
@@ -49,7 +51,15 @@ class App {
     this.$formButtons.style.display = "none";
   }
 
-  addNote(note)
+  addNote(note) {
+    const newNote = {
+      title: note.title,
+      text: note.text,
+      color: "white",
+      id: this.notes.length > 0 ? this.notes[this.notes.length - 1].id + 1 : 1
+    };
+    this.notes = [...this.notes, newNote];
+  }
 }
 
 new App();

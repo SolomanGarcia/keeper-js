@@ -107,6 +107,7 @@ header {
   border: 0;
   overflow: hidden;
   position: relative;
+  cursor: pointer;
 }
 
 .modal-title {
@@ -155,6 +156,7 @@ header {
   font-weight: 500;
   line-height: 1.5rem;
   border: 0;
+  cursor: pointer;
 }
 
 #form:focus,
@@ -191,6 +193,7 @@ input:focus {
   border-radius: 4px;
   border-color: transparent !important;
   background-color: rgb(251, 251, 251);
+  cursor: pointer;
 }
 
 #submit-button {

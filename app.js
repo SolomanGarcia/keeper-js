@@ -9,7 +9,7 @@ class App {
 
   addEventListeners() {
     document.body.addEventListener("click", (event) => {
-      handleFormClick(event);
+      this.handleFormClick(event);
     });
   }
 
@@ -18,8 +18,10 @@ class App {
 
     if (isFormClicked) {
       // open form
+      this.openForm();
     } else {
       // close form
+      this.closeFrom();
     }
   }
 
@@ -27,6 +29,12 @@ class App {
     this.$form.classList.add("form-open");
     this.$noteTitle.style.display = "block";
     this.$formButtons.style.display = "block";
+  }
+
+  closeFrom() {
+    this.$form.classList.remove("form-open");
+    this.$noteTitle.style.display = "none";
+    this.$formButtons.style.display = "none";
   }
 }
 

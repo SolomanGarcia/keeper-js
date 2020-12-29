@@ -26,6 +26,7 @@ class App {
       this.handleFormClick(event);
       this.selectNote(event);
       this.openModal(event);
+      this.deleteNote(event);
     });
 
     document.body.addEventListener("mouseover", (event) => {
@@ -120,6 +121,8 @@ class App {
   }
 
   openModal(event) {
+    if (event.target.matches(".toolbar-delete")) return;
+
     if (event.target.closest(".note")) {
       this.$modal.classList.toggle("open-modal");
       this.$modalTitle.value = this.title;
@@ -169,6 +172,14 @@ class App {
     this.id = $selectedNote.dataset.id;
   }
 
+  deleteNote(event) {
+    event.stopPropagation();
+    if (!event.target.matches(".toolbar-delete")) return;
+    const id = event.target.dataset.id;
+    this.notes = this.notes.filter((note) => note.id !== Number(id));
+    this.displayNotes();
+  }
+
   displayNotes() {
     const hasNotes = this.notes.length > 0;
     this.$placeholder.style.display = hasNotes ? "none" : "flex";
@@ -184,7 +195,9 @@ class App {
         <img class="toolbar-color" data-id=${
           note.id
         } src="https://img.icons8.com/office/16/000000/paint-palette.png"/>
-        <img class="toolbar-delete" src="https://img.icons8.com/flat_round/64/000000/delete-sign.png"/>
+        <img class="toolbar-delete" data-id=${
+          note.id
+        } src="https://img.icons8.com/flat_round/64/000000/delete-sign.png"/>
       </div>
     </div>
   </div>

@@ -16,6 +16,7 @@ class App {
     this.$modalTitle = document.querySelector(".modal-title");
     this.$modalText = document.querySelector(".modal-text");
     this.$modalCloseButton = document.querySelector(".modal-close-button");
+    this.$colorTooltip = document.querySelector("#color-tooltip");
 
     this.addEventListeners();
   }
@@ -25,6 +26,10 @@ class App {
       this.handleFormClick(event);
       this.selectNote(event);
       this.openModal(event);
+    });
+
+    document.body.addEventListener("mouseover", (event) => {
+      this.openTooltip(event);
     });
 
     this.$form.addEventListener("submit", (event) => {
@@ -78,6 +83,16 @@ class App {
     this.$formButtons.style.display = "none";
     this.$noteTitle.value = "";
     this.$noteText.value = "";
+  }
+
+  openTooltip(event) {
+    if (!event.target.matches(".toolbar-color")) return;
+    this.id = event.target.nextElementSibling.dataset.id;
+    const noteCoords = event.target.getBoundingClientRect();
+    const horizontal = noteCoords.left + window.scrollX;
+    const vertical = noteCoords.top + window.scrollY;
+    this.$colorTooltip.style.transform = `translate(${horizontal}px, ${vertical}px)`;
+    this.$colorTooltip.style.display = "flex";
   }
 
   openModal(event) {
@@ -135,8 +150,8 @@ class App {
     <div class="note-text">${note.text}</div>
     <div class="toolbar-container">
       <div class="toolbar">
-        <img class="toolbar-color" src="https://icon.now.sh/palette">
-        <img class="toolbar-delete" src="https://icon.now.sh/delete">
+        <img class="toolbar-color" src="https://img.icons8.com/office/16/000000/paint-palette.png"/>
+        <img class="toolbar-delete" src="https://img.icons8.com/flat_round/64/000000/delete-sign.png"/>
       </div>
     </div>
   </div>
